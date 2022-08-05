@@ -1,3 +1,3 @@
-# create-and-render-blog-articles-in-storyblok-and-pvnzvm
+# Storyblok + Next.js Blog 
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/create-and-render-blog-articles-in-storyblok-and-pvnzvm)
+[Forked from Ultimate Tutorial Series](https://www.storyblok.com/tp/nextjs-headless-cms-ultimate-tutorial)

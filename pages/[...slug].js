@@ -1,14 +1,16 @@
-import Head from 'next/head';
-import Layout from '../components/Layout';
+import Head from 'next/head'
+import Layout from '../components/Layout'
 
 import {
   useStoryblokState,
   getStoryblokApi,
   StoryblokComponent,
-} from '@storyblok/react';
+} from '@storyblok/react'
 
 export default function Page({ story }) {
-  story = useStoryblokState(story);
+  story = useStoryblokState(story, {
+    resolveRelations: ['popular_articles.articles'],
+  })
 
   return (
     <div>
@@ -21,18 +23,23 @@ export default function Page({ story }) {
         <StoryblokComponent blok={story.content} />
       </Layout>
     </div>
-  );
+  )
 }
 
-export async function getStaticProps({ params }) {
-  let slug = params.slug ? params.slug.join('/') : 'home';
+export async function getStaticProps({ params, preview }) {
+  let slug = params.slug ? params.slug.join('/') : 'home'
 
   let sbParams = {
-    version: 'draft', // or 'published'
-  };
+    version: 'published',
+    resolve_relations: ['popular_articles.articles'],
+  }
 
-  const storyblokApi = getStoryblokApi();
-  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
+  if (preview) {
+    sbParams.version = 'draft'
+  }
+
+  const storyblokApi = getStoryblokApi()
+  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams)
 
   return {
     props: {
@@ -40,27 +47,27 @@ export async function getStaticProps({ params }) {
       key: data ? data.story.id : false,
     },
     revalidate: 3600,
-  };
+  }
 }
 
 export async function getStaticPaths() {
-  const storyblokApi = getStoryblokApi();
-  let { data } = await storyblokApi.get('cdn/links/');
+  const storyblokApi = getStoryblokApi()
+  let { data } = await storyblokApi.get('cdn/links/')
 
-  let paths = [];
+  let paths = []
   Object.keys(data.links).forEach((linkKey) => {
     if (data.links[linkKey].is_folder || data.links[linkKey].slug === 'home') {
-      return;
+      return
     }
 
-    const slug = data.links[linkKey].slug;
-    let splittedSlug = slug.split('/');
+    const slug = data.links[linkKey].slug
+    let splittedSlug = slug.split('/')
 
-    paths.push({ params: { slug: splittedSlug } });
-  });
+    paths.push({ params: { slug: splittedSlug } })
+  })
 
   return {
     paths: paths,
     fallback: false,
-  };
+  }
 }

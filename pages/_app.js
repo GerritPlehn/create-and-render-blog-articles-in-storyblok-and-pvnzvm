@@ -7,21 +7,21 @@ import Teaser from '../components/Teaser';
 import HeroSection from '../components/HeroSection';
 import AllArticles from '../components/AllArticles';
 import Article from '../components/Article';
-import PopularArtices from '../components/PopularArticles';
+import PopularArticles from '../components/PopularArticles';
 
 const components = {
   feature: Feature,
   grid: Grid,
   teaser: Teaser,
   page: Page,
-  'hero-section': HeroSection,
+  hero_section: HeroSection,
   all_articles: AllArticles,
-  Article: Article,
-  popular_articles: PopularArtices,
+  article: Article,
+  popular_articles: PopularArticles,
 };
-
+console.log('hello world')
 storyblokInit({
-  accessToken: 'UatY9FBAFasWsdHl7UZJgwtt',
+  accessToken: process.env.ACCESS_TOKEN,
   use: [apiPlugin],
   components,
 });
