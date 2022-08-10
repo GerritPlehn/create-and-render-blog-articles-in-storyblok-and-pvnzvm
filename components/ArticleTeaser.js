@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { render } from 'storyblok-rich-text-react-renderer';
+import Link from 'next/link'
+import { render } from 'storyblok-rich-text-react-renderer'
 
 const ArticleTeaser = ({ article }) => {
   return (
@@ -28,6 +28,6 @@ const ArticleTeaser = ({ article }) => {
         </div>
       </div>
     </div>
-  );
-};
-export default ArticleTeaser;
+  )
+}
+export default ArticleTeaser

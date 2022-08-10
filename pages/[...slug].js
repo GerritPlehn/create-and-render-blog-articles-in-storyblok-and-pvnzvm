@@ -7,7 +7,7 @@ import {
   StoryblokComponent,
 } from '@storyblok/react'
 
-export default function Page({ story }) {
+export default function Page({ story, config }) {
   story = useStoryblokState(story, {
     resolveRelations: ['popular_articles.articles'],
   })
@@ -19,7 +19,7 @@ export default function Page({ story }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout>
+      <Layout config={config}>
         <StoryblokComponent blok={story.content} />
       </Layout>
     </div>
@@ -40,11 +40,13 @@ export async function getStaticProps({ params, preview }) {
 
   const storyblokApi = getStoryblokApi()
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams)
+  let { data: config } = await storyblokApi.get(`cdn/stories/config`, sbParams)
 
   return {
     props: {
       story: data ? data.story : false,
       key: data ? data.story.id : false,
+      config: config ? config.story.content : false,
     },
     revalidate: 3600,
   }

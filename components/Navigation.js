@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import Link from 'next/link';
+import { useState } from 'react'
+import Link from 'next/link'
 const Navigation = () => {
-  const [openMenu, setOpenMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false)
 
   return (
     <div className="relative bg-white border-b-2 border-gray-100">
@@ -143,7 +143,7 @@ const Navigation = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Navigation;
+export default Navigation

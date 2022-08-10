@@ -1,5 +1,5 @@
-import ArticleTeaser from './ArticleTeaser';
-import { storyblokEditable } from '@storyblok/react';
+import ArticleTeaser from './ArticleTeaser'
+import { storyblokEditable } from '@storyblok/react'
 
 const PopularArtices = ({ blok }) => {
   return (
@@ -9,11 +9,11 @@ const PopularArtices = ({ blok }) => {
         {...storyblokEditable(blok)}
       >
         {blok.articles.map((article) => {
-          article.content.slug = article.slug;
-          return <ArticleTeaser article={article.content} key={article.uuid} />;
+          article.content.slug = article.slug
+          return <ArticleTeaser article={article.content} key={article.uuid} />
         })}
       </div>
     </>
-  );
-};
-export default PopularArtices;
+  )
+}
+export default PopularArtices
